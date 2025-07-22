@@ -1,0 +1,14 @@
+services:
+  flask:
+    build: ./backend
+    container_name: backend-flask
+    environment:
+      - FLASK_ENV=development
+      - PYTHONUNBUFFERED=True                   
+    restart: on-failure
+    volumes:
+      - ./backend:/backend
+    # Порт наружу : порт внутри контейнера
+    ports:
+      - "5000:5000"
+    command: python main.py
