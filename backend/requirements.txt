@@ -1,1 +1,4 @@
 Flask==3.1.1
+Flask-SQLAlchemy==3.1.1
+psycopg2-binary==2.9.9
+markdown==3.6
