@@ -1,14 +1,37 @@
 services:
   flask:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: backend-flask
     environment:
       - FLASK_ENV=development
       - PYTHONUNBUFFERED=True                   
+      - POSTGRES_HOST=postgres-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_NAME=moneydb
+      - POSTGRES_USER=moneyuser
+      - POSTGRES_PASSWORD=moneypass
     restart: on-failure
     volumes:
-      - ./backend:/backend
-    # Порт наружу : порт внутри контейнера
+      # - ./backend:/backend
+      - ./:/workspace
     ports:
       - "5000:5000"
-    command: python main.py
+    # command: python main.py
+    command: python backend/main.py
+    depends_on:
+      - postgres-db
+
+
+  postgres-db:
+    image: postgres:17
+    container_name: postgres-db
+    environment:
+      - POSTGRES_DB=moneydb
+      - POSTGRES_USER=moneyuser
+      - POSTGRES_PASSWORD=moneypass
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"

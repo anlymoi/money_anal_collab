@@ -9,8 +9,8 @@
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	// "forwardPorts": [5000, 5432, 3000],
 	// "runServices": ["flask", "postgres", "grafana"],
-	"forwardPorts": [5000],
-	"runServices": ["flask"],
+	"forwardPorts": [5000, 5432],
+	"runServices": ["flask", "postgres-db"],
 	"postCreateCommand": "pip install -r backend/requirements.txt",
 	"customizations": {
 		"vscode": {
