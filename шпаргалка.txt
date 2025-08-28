@@ -1,0 +1,42 @@
+    1) `git pull origin main` - загрузи на свой ПК свежую версию проекта;
+    2) открой консоль в папке с проектом (money_anal_collab);
+    3) `docker-compose up -d` - собери и запусти контейнер;
+    4) `docker exec -it backend-flask /bin/bash` - открой консоль внутри контейнера;
+    5) проверь, что всё работает: 
+        - БД: подключись, например, через DBeaver. host: localhost, port: 5432, database: moneydb, user: moneyuser, pass: moneypass
+        - фронт: http://localhost:5000, http://localhost:5000/dbtest
+        - бэк: введи в терминале контейнера `ls` (должна выводиться файловая система ubuntu)
+    7) have fun!
+    8) `docker-compose down` - в новом окне консоли заверши работу.
+    9) - после окончания разработки сделай свою ветку в гите, запушь в неё изменения
+
+
+1. ГИТ
+
+    1. войди в директорию проекта
+    cd "d:/programs folder/money_anal_collab"
+
+    2. Переключитесь на ветку dev (создай, если её нет):
+    git checkout dev
+    # или если ветки нет:
+    # git checkout -b dev
+
+    3. Добавьте все изменения:
+    git add .
+
+    4. Зафиксируйте изменения с понятным комментарием:
+    git commit -m "Реализованы миграции, обновлён README, актуализирован backend"
+
+    5. Отправьте ветку на GitHub:
+    git push -u origin dev
+
+    Теперь все ваши изменения окажутся в ветке dev на GitHub!
+
+2. ДОКЕР
+
+
+3. МИГРАЦИИ
+cd ./workspace/backend
+
+export FLASK_APP=main.py
+
