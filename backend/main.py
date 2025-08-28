@@ -1,10 +1,12 @@
 import markdown # type: ignore
 from markupsafe import Markup # type: ignore
-
 import os
 from flask import Flask # type: ignore
 from flask_sqlalchemy import SQLAlchemy # type: ignore
 import psycopg2
+from flask_migrate import Migrate 
+from models import db
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
@@ -12,7 +14,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
     f"@{os.environ.get('POSTGRES_HOST')}:{os.environ.get('POSTGRES_PORT')}/{os.environ.get('POSTGRES_NAME')}"
 )
 
-db = SQLAlchemy(app)
+db.init_app(app)
+migrate = Migrate(app, db)
+
 def get_db_connection():
     conn = psycopg2.connect(
         host=os.environ.get("POSTGRES_HOST"),
