@@ -3,8 +3,8 @@
 > На устройстве нужно иметь Docker Desktop и IDE, которая поддерживает devcontainer (например, VS Code).
 
 Выполни действия:
-1) `git pull origin main` - загрузи на свой ПК свежую версию проекта;
-2) открой консоль в папке с проектом (money_anal_collab);
+1) открой консоль в папке с проектом (money_anal_collab);
+2) `git pull origin main` - загрузи на свой ПК свежую версию проекта;
 3) `docker-compose up -d` - собери и запусти контейнер;
 4) `docker exec -it backend-flask /bin/bash` - открой консоль внутри контейнера;
 5) проверь, что всё работает: 
