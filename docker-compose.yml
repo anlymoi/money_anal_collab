@@ -14,8 +14,7 @@ services:
       - POSTGRES_PASSWORD=moneypass
     restart: on-failure
     volumes:
-      # - ./backend:/backend
-      - ./:/workspace
+       - ./:/app
     ports:
       - "5000:5000"
     # command: python main.py

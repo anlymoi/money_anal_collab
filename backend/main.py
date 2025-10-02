@@ -1,35 +1,10 @@
-import markdown # type: ignore
-from markupsafe import Markup # type: ignore
+import markdown
+from markupsafe import Markup
 import os
-from flask import Flask # type: ignore
-from flask_sqlalchemy import SQLAlchemy # type: ignore
-import psycopg2
-from flask_migrate import Migrate 
-from models import db
+from flask_migrate import Migrate
+from models import *
 
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = (
-    f"postgresql://{os.environ.get('POSTGRES_USER')}:{os.environ.get('POSTGRES_PASSWORD')}"
-    f"@{os.environ.get('POSTGRES_HOST')}:{os.environ.get('POSTGRES_PORT')}/{os.environ.get('POSTGRES_NAME')}"
-)
-
-db.init_app(app)
-migrate = Migrate(app, db)
-
-def get_db_connection():
-    conn = psycopg2.connect(
-        host=os.environ.get("POSTGRES_HOST"),
-        port=os.environ.get("POSTGRES_PORT"),
-        dbname=os.environ.get("POSTGRES_NAME"),
-        user=os.environ.get("POSTGRES_USER"),
-        password=os.environ.get("POSTGRES_PASSWORD"),
-    )
-    return conn
-
-# @app.route('/')
-# def hello_world():
-#     return "<h1>UwU<h1><h2>проверяем, что всё работает и все счастливы няяя<h2>"
 
 
 @app.route('/')
@@ -43,8 +18,6 @@ def hello_world():
         return Markup(html)
     except Exception as e:
         return f"<h3 style='color:red;'>ашипка при чтении README.md:</h3><pre>{e}</pre>"
-    
-
 
 
 @app.route('/dbtest')
@@ -56,7 +29,7 @@ def db_test():
         version = cur.fetchone()[0]
         cur.close()
         conn.close()
-        return f"<h3>Postgres connection OK!</h3><p>DB version: {version}</p>"
+        return f"<h3>Postgres успешно подключился!</h3><p>DB version: {version}</p>"
     except Exception as e:
         return f"<h3 style='color:red;'>DB connection error:</h3><pre>{e}</pre>"
 

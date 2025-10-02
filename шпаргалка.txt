@@ -36,7 +36,12 @@
 
 
 3. МИГРАЦИИ
-cd ./workspace/backend
 
-export FLASK_APP=main.py
+в консоли контейнера выполнить команды:
+1) cd /app/backend
+2) export FLASK_APP=main.py (или models.py?)
+3) flask db migrate -m "чота там новое мигрировали"
+4) чекнуть, что случилось в скрипте backend/migrations/migrate.py (некоторые изменения могут не пролиться - например, индексы)
+5) flask db upgrade
 
+migrate/update можно выполнять при каждом изменении моделей
